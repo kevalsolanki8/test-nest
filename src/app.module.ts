@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
+// Todo: Move to .env
+const MONGODB_URI = `mongodb+srv://keval:B1gTHgylOu1r0BAm@clusterx.uzfp2.mongodb.net/test-nest-db?retryWrites=true&w=majority`;
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [MongooseModule.forRoot(MONGODB_URI), UsersModule, AuthModule],
 })
 export class AppModule {}

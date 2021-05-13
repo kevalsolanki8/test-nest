@@ -1,0 +1,1 @@
+export const JWT_SECRET = 'ASSUME_IT_IS_A_STRING_SECRET';
