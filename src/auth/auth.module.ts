@@ -14,7 +14,7 @@ import { JwtStrategy } from './jwt.strategy';
             { name: UserEntity.name, schema: UserEntity.schema },
         ]),
         JwtModule.register({
-            secret: JWT_SECRET,
+            secret: process.env.JWT_SECRET,
             signOptions: {
                 expiresIn: '3600s',
             },

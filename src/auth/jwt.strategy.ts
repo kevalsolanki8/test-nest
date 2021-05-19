@@ -7,14 +7,18 @@ import { InjectModel } from '@nestjs/mongoose';
 import { UserEntity } from 'src/users/users.model';
 import { Model } from 'mongoose';
 import { User } from '../users/interface/users.interface';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-    constructor(@InjectModel(UserEntity.name) private userModel: Model<User>) {
+    constructor(
+        @InjectModel(UserEntity.name) private userModel: Model<User>,
+        private configService: ConfigService,
+    ) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: false,
-            secretOrKey: JWT_SECRET,
+            secretOrKey: configService.get('JWT_SECRET'),
         });
     }
 
